@@ -9,5 +9,6 @@ public class PaymentResponse {
 
     private String message;
     private Integer discount;
+    private Float totalPrice;
 
 }

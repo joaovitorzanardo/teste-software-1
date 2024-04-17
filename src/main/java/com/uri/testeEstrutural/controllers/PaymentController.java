@@ -19,9 +19,12 @@ public class PaymentController {
     @GetMapping
     public ResponseEntity<PaymentResponse> pay(@RequestBody @Valid PaymentDto paymentDto) {
         Integer discount = paymentService.pay(paymentDto);
+        Float dicountCalc = discount.floatValue() / 100;
+        Float newTotalPrice = paymentDto.getTotalPrice() - (paymentDto.getTotalPrice() * dicountCalc);
         PaymentResponse paymentResponse = PaymentResponse.builder()
                 .message("Você recebeu um desconto de " + discount + "%!")
-                .discount(discount).build();
+                .discount(discount)
+                .totalPrice(newTotalPrice).build();
         return ResponseEntity.ok(paymentResponse);
     }
 

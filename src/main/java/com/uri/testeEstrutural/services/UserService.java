@@ -35,13 +35,19 @@ public class UserService {
     }
 
     private boolean isUsernameValid(String username) {
-        boolean isValid = true;
-
-        if (username.length() < 5 || username.length() > 8 || !username.matches("^[a-zA-Z0-9]+$")) {
+        if (username.length() < 5 || username.length() > 8) {
             return false;
         }
 
-        return isValid;
+        if (!String.valueOf(username.charAt(0)).matches("[a-zA-Z]")) {
+            return false;
+        }
+
+        if (!username.matches("^[a-zA-Z0-9]+$")) {
+            return false;
+        }
+
+        return true;
     }
 
 }
